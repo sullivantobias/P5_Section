@@ -1,12 +1,22 @@
-let ball, ball2, ball3;
-let ar;
+let ar = [];
 
 function setup() {
   createCanvas(500, 500);
+  /** If we want to create a cloudy weather
 
-  ar = [ball = new Bubble(200, 200, 30), ball2 = new Bubble(300, 200, 50),
-    ball3 = new Bubble(130, 300, 60)
-  ]
+  for (var i = 0; i < 2400; i++) {
+    let r = random(10, 40);
+    let b = new Bubble(random(width), random(height), r);
+    ar.push(b);
+
+}**/
+}
+
+function mouseDragged() {
+  /** If we want to made bubbles each time we drag**/
+  let r = random(10, 40);
+  let b = new Bubble(mouseX, mouseY, r);
+  ar.push(b);
 }
 
 function draw() {
@@ -26,12 +36,22 @@ class Bubble {
   }
 
   displayed() {
+
+    /** if we want color **/
+
+    /*let r = random(0, 255);
+      let g = random(0, 255);
+      let b = random(0, 255);
+      stroke(r, g, b);
+      strokeWeight(3); */
+    noStroke();
+    fill(255, 50);
     ellipse(this.x, this.y, this.r);
   }
 
   moved() {
-    this.x = this.x + random(-5, 5);
-    this.y = this.y + random(-5, 5);
+    this.x = this.x + random(-4, 4);
+    this.y = this.y + random(-4, 4);
   }
   blow() {
     if (this.x < this.r / 2 || this.x > width - (this.r / 2) ||
