@@ -11,7 +11,7 @@ function setup() {
 
 } ** /
 /** Test Bubble on react to the click and hover state **/
-  for (var i = 0; i < 30; i++) {
+  for (var i = 0; i < 10; i++) {
     let r = random(10, 40);
     let b = new Bubble(random(width), random(height), r);
     ar.push(b);
@@ -28,31 +28,36 @@ function mouseDragged() {
 }
 */
 function mousePressed() {
-  for (let i = 0; i < ar.length; i++) {
+  /*for (let i = 0; i < ar.length; i++) {
     if (ar[i].isClicked(mouseX, mouseY)) {
       ar.splice(i, 1);
     }
-  }
+  }*/
 }
 
 function draw() {
   background(0);
-  for (let i = 0; i < ar.length; i++) {
+  for (let i = ar.length - 1; i >= 0; i--) {
     ar[i].displayed();
     ar[i].moved();
 
     if (ar[i].blow()) {
       ar.splice(i, 1);
     }
-    if (ar[i].isHovered(mouseX, mouseY)) {
+    /*if (ar[i].isHovered(mouseX, mouseY)) {
       ar[i].strokeChange("red");
     } else {
       ar[i].strokeChange(255);
-    }
+    }*/
+
+    // Interactions betwwens bubbles //
+
+    /*if (ar[1].isTouching(ar[3])) {
+      ar.splice(i, 1);
+    }*/
 
   }
 }
-
 class Bubble {
   constructor(x, y, radius) {
     this.x = x;
@@ -82,6 +87,10 @@ class Bubble {
     }
   }
 
+  isTouching(other) {
+    var d = dist(this.x, this.y, other.x, other.y);
+    return d < this.r / 2 + other.r / 2;
+  }
   displayed() {
 
     /** if we want color **/
